@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  .navbar-custom {
+    background-color: #ce812a; 
+  }
+  .navbar-custom .navbar-brand,
+  .navbar-custom .navbar-nav .nav-link {
+    color: #ffffff; 
+  }
+  .jumbotron-custom {
+    background-size: cover;
+    color: black; 
+    background-color: antiquewhite;
+    text-align: center;
+    padding: 150px 0;
+  }
+  .feature-section {
+    background-color: #4093e7; 
+    padding: 50px 0;
+  }
+  .feature-icon {
+    font-size: 3rem;
+    color: #008080; 
+  }
+  .bordered-section{
+    border: 2px solid #000; 
+    background-color: rgb(225, 225, 156);
+    padding: 5px;         
+    margin: 5px;           
+    border-radius: 5px;
+  }

@@ -1,0 +1,17 @@
+1709363247735	Rename package 'com.infy'
+1709363265010	Rename package 'com.infy.controller'
+1709363282729	Rename package 'com.infy.dao'
+1709363300756	Rename package 'com.infy.model'
+1709363312764	Rename package 'com.infy.service'
+1709363401579	Rename type 'InfyBankToTraineeApplication'
+1709363436906	Rename type 'CustomerController'
+1709364006173	Rename package 'com.reservation.dao'
+1709364020269	Rename type 'CustomerDAO'
+1709364054138	Delete element
+1709364761952	Rename package 'com.reservation.model'
+1709364781946	Rename type 'Customer'
+1709365140792	Delete element
+1709381106047	Rename type 'Customer'
+1709381190121	Rename type 'User'
+1709398878408	Delete element
+1709400372691	Rename resource 'User.html'

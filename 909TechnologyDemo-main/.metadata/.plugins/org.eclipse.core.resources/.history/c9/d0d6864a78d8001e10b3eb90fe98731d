@@ -1,0 +1,5 @@
+package com.reservation.utility;
+
+public class LoggingAspect {
+
+}

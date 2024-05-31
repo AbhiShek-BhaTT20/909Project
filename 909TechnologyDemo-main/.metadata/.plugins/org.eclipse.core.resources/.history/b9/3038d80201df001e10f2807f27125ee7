@@ -1,0 +1,151 @@
+package com.reservation.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import jakarta.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.reservation.dto.EmployeeDTO;
+import com.reservation.entity.Employee;
+import com.reservation.exception.ReservationSystemException;
+import com.reservation.repository.CustomerRepository;
+import com.reservation.service.CustomerService;
+
+@Service("customerService")
+@Transactional
+public class CustomerServiceImpl implements CustomerService {
+	
+	@Autowired
+	CustomerRepository customerRepository;
+
+	@Override
+	public Integer addCustomer(EmployeeDTO customerDTO) throws ReservationSystemException {
+		Employee customer=customerRepository.findByEmail(customerDTO.getEmail());
+		boolean isCustomerEmailNotAvailable=(customer==null);
+		if(isCustomerEmailNotAvailable) {
+			Employee customer1=new Employee();
+			customer1.setAge(customerDTO.getAge());
+			customer1.setEmail(customerDTO.getEmail());
+			customer1.setGender(customerDTO.getGender());
+			customer1.setName(customerDTO.getName());
+			customer1.setPassword(customerDTO.getPassword());
+			customer1.setPhoneNumber(customerDTO.getPhoneNumber());
+			customer1.setRole(customerDTO.getRole());
+			Employee customerSave=customerRepository.save(customer1);
+			return customerSave.getId();
+		}
+		else {
+			throw new ReservationSystemException("CUSTOMER_EMAIL_ALREADY_IN_DB");
+		}
+	}
+
+	@Override
+	public List<EmployeeDTO> getAllCustomers() throws ReservationSystemException {
+		Iterable<Employee> customers= customerRepository.findAll();
+		List<EmployeeDTO> customers2=new ArrayList<EmployeeDTO>();
+		customers.forEach(customer->{
+			EmployeeDTO cust=new EmployeeDTO();
+			cust.setAge(customer.getAge());
+			cust.setEmail(customer.getEmail());
+			cust.setGender(customer.getGender());
+			cust.setId(customer.getId());
+			cust.setName(customer.getName());
+			cust.setPhoneNumber(customer.getPhoneNumber());
+			cust.setRole(customer.getRole());
+			customers2.add(cust);
+		});
+		if(customers2.isEmpty()){
+			throw new ReservationSystemException("CUSTOMERS_NOT_FOUND");
+		}
+		return customers2;
+	}
+
+	@Override
+	public EmployeeDTO getCustomerById(Integer id) throws ReservationSystemException {
+		Optional<Employee> optional=customerRepository.findById(id);
+		Employee customer=optional.orElseThrow(()-> new ReservationSystemException("CUSTOMER_NOT_FOUND"));
+		EmployeeDTO cust=new EmployeeDTO();
+		cust.setAge(customer.getAge());
+		cust.setEmail(customer.getEmail());
+		cust.setGender(customer.getGender());
+		cust.setId(customer.getId());
+		cust.setName(customer.getName());
+		cust.setPhoneNumber(customer.getPhoneNumber());
+		cust.setRole(customer.getRole());
+		return cust;
+	}
+
+	@Override
+	public List<Employee> searchCustomerRole(String name) throws ReservationSystemException {
+		List<Employee> customer=customerRepository.findByName(name);
+		return customer;
+	}
+
+	@Override
+	public String updateCustomer(EmployeeDTO customerDTO) throws ReservationSystemException {
+		Optional<Employee> optional=customerRepository.findById(customerDTO.getId());
+		Employee customer=optional.orElseThrow(()-> new ReservationSystemException("CUSTOMER_NOT_FOUND"));
+		customer.setAge(customerDTO.getAge());
+		customer.setEmail(customerDTO.getEmail());
+		customer.setGender(customerDTO.getGender());
+		customer.setName(customerDTO.getName());
+		customer.setPassword(customerDTO.getPassword());
+		customer.setPhoneNumber(customerDTO.getPhoneNumber());
+		customer.setRole(customerDTO.getRole());
+		return "updateSuccessfully";
+	}
+
+	@Override
+	public String deleteCustomer(Integer id) throws ReservationSystemException {
+		Optional<Employee> optional=customerRepository.findById(id);
+		Employee customer=optional.orElseThrow(()-> new ReservationSystemException("CUSTOMER_NOT_FOUND"));
+		customerRepository.delete(customer);
+		return "deleteSuccessfully";
+	}
+
+	@Override
+	public List<EmployeeDTO> findByAgeAndRole(int minAge, int maxAge, String role) {
+		minAge = minAge == 0 ? 0 : minAge;
+        maxAge = maxAge == 0 ? 100 : maxAge;
+        List<EmployeeDTO> filteredEmployees = new ArrayList<>();
+        
+        if (role == null || role.isEmpty()) {
+            List<Employee> employees = customerRepository.findByAgeBetween(minAge, maxAge);
+            for (Employee employee : employees) {
+                EmployeeDTO employeeDTO = convertToEmployeeDTO(employee);
+                filteredEmployees.add(employeeDTO);
+            }
+        } else {
+            List<Employee> employees = customerRepository.findByAgeAndRole(minAge, maxAge, role);
+            for (Employee employee : employees) {
+                EmployeeDTO employeeDTO = convertToEmployeeDTO(employee);
+                filteredEmployees.add(employeeDTO);
+            }
+        }
+        
+        System.out.println(filteredEmployees);
+        return filteredEmployees;
+    }
+	
+	private EmployeeDTO convertToEmployeeDTO(Employee employee) {
+	    EmployeeDTO employeeDTO = new EmployeeDTO();
+	    employeeDTO.setAge(employee.getAge());
+	    employeeDTO.setRole(employee.getRole());
+	    employeeDTO.setName(employee.getName());
+	    employeeDTO.setEmail(employee.getEmail());
+	    employeeDTO.setPhoneNumber(employee.getPhoneNumber());
+	    employeeDTO.setGender(employee.getGender());
+	    return employeeDTO;
+	}
+
+
+	}
+
+
+	
+	
+

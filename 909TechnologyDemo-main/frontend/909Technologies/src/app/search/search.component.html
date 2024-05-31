@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<body>
+  <div class="container-fluid gradient-background">
+    <div class="row">
+      <div class="col-md-8 section">
+        <div class="card">
+          <div class="card-header bg-success text-white">
+            Search employees based on age range :
+          </div>
+          <div class="card-body">
+            <form [formGroup]="filterForm" (ngSubmit)="applyFilters()">
+              <div class="form-group">
+                <label for="minAge">Min Age:</label>
+                <input type="number" formControlName="minAge" id="minAge" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="maxAge">Max Age:</label>
+                <input type="number" formControlName="maxAge" id="maxAge" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="role">Role:</label>
+                <input type="text" formControlName="role" id="role" class="form-control"><br>
+              </div>
+              <button type="submit" class="btn btn-success">Search</button>
+              
+            </form>
+            
+          </div>
+        </div><br><br><br>
+      </div>
+      
+      <div class="col-md-12 section">
+        <div class="card-2">
+          <div class="card-header bg-success text-white" style=" height: 50px; text-align: center; font-size: 3ch;">
+            Results
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let employee of filteredEmployees">
+                Name : {{ employee.name }} - {{ employee.age }} years old - Role :   {{ employee.role }} - Email : {{employee.email}} - Phone : {{employee.phoneNumber}}
+              </li>
+              <li class="list-group-item text-muted" *ngIf="filteredEmployees.length === 0">No results found</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </body>

@@ -1,0 +1,11 @@
+package com.itsolution.exception;
+
+public class ReservationSystemException extends Exception {
+	
+	private static final long serialVersionUID=1L;
+	
+	public ReservationSystemException(String message) {
+		super(message);
+	}
+
+}

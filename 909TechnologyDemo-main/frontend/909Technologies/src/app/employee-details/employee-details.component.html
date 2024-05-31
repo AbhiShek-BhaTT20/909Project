@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Phone Number</th>
+                <th>Age</th>
+                <th>Gender</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let detail of details">
+                <td><span>{{detail.id}}</span></td>
+                <td><span>{{detail.name}}</span></td>
+                <td><span>{{detail.email}}</span></td>
+                <td><span>{{detail.role}}</span></td>
+                <td><span>{{detail.phoneNumber}}</span></td>
+                <td><span>{{detail.age}}</span></td>
+                <td><span>{{detail.gender}}</span></td>
+                <td>
+                    <button class="btn btn-sm btn-warning" (click)="editDetails(detail)">
+                        <i id="myicon1" class="fa fa-edit" ></i>Edit
+                    </button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteDetails(detail)">
+                        <i  id="myicon1" class="fa fa-delete"  ></i>Delete
+                    </button>
+                    
+                 </tr>
+        </tbody>
+    </table>
+</div>

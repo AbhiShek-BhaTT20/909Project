@@ -1,0 +1,17 @@
+.success-message {
+  background-color: rgb(229, 229, 210);
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  .card{
+    width: 400px;
+    height: auto;
+    text-align: justify;
+    margin-left: 28%;
+    padding: 0%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0.4, 0.7, 0.5, 0.8);
+  }

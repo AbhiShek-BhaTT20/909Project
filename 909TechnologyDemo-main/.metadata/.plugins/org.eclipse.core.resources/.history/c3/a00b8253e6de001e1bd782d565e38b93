@@ -1,0 +1,17 @@
+package com.reservation.service;
+
+import java.util.List;
+
+import com.reservation.dto.CustomerDTO;
+import com.reservation.entity.Employee;
+import com.reservation.exception.ReservationSystemException;
+
+public interface CustomerService {
+	 	Integer addCustomer(CustomerDTO customerDTO) throws ReservationSystemException;
+	    List<CustomerDTO> getAllCustomers() throws ReservationSystemException;
+	    CustomerDTO getCustomerById(Integer id) throws ReservationSystemException;
+	    List<Employee> searchCustomerRole(String name)throws ReservationSystemException;
+	    String deleteCustomer(Integer id) throws ReservationSystemException;
+		String updateCustomer(CustomerDTO customerDTO) throws ReservationSystemException;
+	    List<CustomerDTO> findByAgeAndRole(int minAge,int maxAge,String role); 
+}

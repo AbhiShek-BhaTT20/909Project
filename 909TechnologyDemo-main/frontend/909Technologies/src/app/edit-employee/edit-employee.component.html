@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center min-vh-100 gradient-bg">
+      <div class="col-12 col-md-6">
+        <h2 class="text-white mb-4">Edit Employee</h2>
+<form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()" class="custom-form">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" formControlName="name" id="name" required>
+  </div>
+  <div class="form-group">
+    <label for="age">Age</label>
+    <input type="number" class="form-control" formControlName="age" id="age" required>
+  </div>
+  <div class="form-group">
+    <label for="gender">Gender:</label>
+    <div class="d-flex align-items-center">
+      <input type="text" class="form-control form-control-sm mr-1" formControlName="gender" id="gender" readonly>
+      <select class="form-control form-control-sm">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" formControlName="email" id="email" required>
+  </div>
+  <div class="form-group">
+    <label for="phoneNumber">Phone Number</label>
+    <input type="text" class="form-control" formControlName="phoneNumber" id="phoneNumber" required>
+  </div>
+  <div class="form-group">
+    <label for="role">Role:</label>
+    <div class="d-flex align-items-center">
+      <input type="text" class="form-control form-control-sm mr-1" formControlName="role" id="role" readonly>
+      <select class="form-control form-control-sm">
+      <option value="Systems Engineer">Systems Engineer</option>
+      <option value="Technology analyst">Technology Analyst</option>
+      <option value="Consultant">Consultant</option>
+      <option value="Project Manager">Project Manager</option>
+      <option value="Delivery Manager">Delivery Manager</option>
+      </select>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary"  [disabled]="!employeeForm.valid">Save</button>
+  <div *ngIf="showSuccessMessage" class="success-message">
+    Employee data saved successfully!
+  </div>
+</form>
